@@ -22,11 +22,10 @@ const appSettings = {
 }
 
 const app = firebase.initializeApp(firebaseConfig)
-const app2 = initializeApp(appSettings)
 
 const storage = firebase.storage()
 
-const database = getDatabase(app2)
+const database = firebase.database(app)
 
 const oldgramInDb = ref(database, "oldgram-post")
 
