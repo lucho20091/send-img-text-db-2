@@ -22,10 +22,11 @@ const appSettings = {
 }
 
 const app = firebase.initializeApp(firebaseConfig)
+const app2 = initializeApp(appSettings)
 
 const storage = firebase.storage()
 
-const database = firebase.database(app)
+const database = getDatabase(app2)
 
 const oldgramInDb = ref(database, "oldgram-post")
 
@@ -73,10 +74,9 @@ const uploadDB = () => {
 uploadBtn.addEventListener("click", uploadDB)
 
 
+function listAllImages(){
 
-const listAllImages = () => {
     const storageRef = storage.ref().child("myimages")
-
     storageRef.listAll().then((result) => {
         result.items.forEach((imageRef) => {
             if (myArr.includes(imageRef.name))
@@ -98,7 +98,12 @@ const displayImage = (imageRef) => {
     })
 }
 
-listAllImages()
+
+window.onload = () =>{
+    setTimeout(listAllImages, 1000)
+    myArr = []
+    textoArr = []
+}
 
 let myArr = []
 let textoArr = []
